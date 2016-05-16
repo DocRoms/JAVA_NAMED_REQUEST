@@ -58,5 +58,5 @@ And not this :
 		
 		// Play with your results...
 	  if (result.next()){
-			result.getString("userName"));
-		}
+		result.getString("userName"));
+	  }
