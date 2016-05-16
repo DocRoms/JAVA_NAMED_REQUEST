@@ -26,7 +26,7 @@ import java.util.Hashtable;
  * Pour Executer la requête il suffit d'appeller la fonction "executeQuery()" qui vous raportera un ResultSet utilisable.
  * 
  */
-public class BI_PREPARE_SQL {
+public class PREPARE_SQL {
 	/**
 	 * Permet de créer un tableau d'association <int, string> pour connaitre le numéro 
 	 * du point d'intérogation dans la chaine, et son associé nommé.
