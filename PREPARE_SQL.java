@@ -82,13 +82,30 @@ public class PREPARE_SQL {
 			
 			// recherche de la première occurence à ":", qui est le premier caract_re du paramètre nommé.
 			int twoPointIndex = _PREPARED_REQUEST.indexOf(":");
-			// recherche de la première occurence à " " à partir de l'indexe des deux points.
+			// recherche de la première occurence à " ", "," ou ")" à partir de l'indexe des deux points.
+			int lastIndex = 0;
 			int spaceIndex = _PREPARED_REQUEST.indexOf(" ", twoPointIndex);
+			int comaIndex = _PREPARED_REQUEST.indexOf(",", twoPointIndex);
+			int parenthesisIndex = _PREPARED_REQUEST.indexOf(")", twoPointIndex);
+			int apostropheIndex = _PREPARED_REQUEST.indexOf("'", twoPointIndex);
+			
+			// On défini en index de fin de mot, l'index le plus proche du début du mot.
+			lastIndex = spaceIndex;
+			
+			if (comaIndex < lastIndex && comaIndex != -1){
+				lastIndex = comaIndex;
+			}
+			if (parenthesisIndex < lastIndex && parenthesisIndex != -1){
+				lastIndex = parenthesisIndex;
+			}
+			if (apostropheIndex < lastIndex && apostropheIndex != -1){
+				lastIndex = apostropheIndex;
+			}
 			// paramètre trouvé.
-			String foundParam = _PREPARED_REQUEST.substring(twoPointIndex, spaceIndex);
+			String foundParam = _PREPARED_REQUEST.substring(twoPointIndex, lastIndex);
 
 			// Remplacement du paramètre dans la requête.
-			_PREPARED_REQUEST = _PREPARED_REQUEST.replaceFirst(foundParam, "?");
+			_PREPARED_REQUEST = _PREPARED_REQUEST.replaceFirst(foundParam, "?");		
 			
 			// Ajout du paramètre et de son index au dictionnaire.
 			_ASSOCIATE_TABLE.put(paramNumber,foundParam.substring(1));
