@@ -8,6 +8,10 @@ import java.util.Hashtable;
 /*
  * Cette classe permet de créer des requêtes préparées nommées.
  * 
+ * Attention à ne pas utiliser d'apostrophe autour des paramètres nommés : 
+ *     TO_DATE(:temps_arrete,'yyyyMMdd') // fonctionne
+ *     TO_DATE(':temps_arrete','yyyyMMdd') // ne fonctionne PAS
+ *
  * Ce qui permet l'utilisation des paramètres du type : 
  *  "SELECT * from :maClass WHERE nom = :monNom"
  *  
